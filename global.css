@@ -4,6 +4,7 @@
   --background-color: #ccd6f6;
   --dark-color: #0b192f;
   --medium-color: #8892b0;
+  --light-green: rgb(159, 227, 229);
   --contrast-color: #24d152;
   --contrast-color2: #eb34d5;
   --font1: "Mulish", sans-serif;
@@ -44,7 +45,7 @@ nav ul li {
 }
 li {
   list-style: none;
-  color: var(--contrast-color2);
+  color: var(--dark-color);
   font-size: var(--p-normal-desktop);
 }
 a {
@@ -56,30 +57,80 @@ a {
 .link-hover:hover {
   text-decoration: underline solid 4px;
 }
-
+header {
+  background-color: var(--light-green);
+  width: 100%;
+  align-items: center;
+}
 main {
   max-width: 1200px;
 }
-.table {
+header,
+main {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+h1 > span {
+  font-size: 1.5rem;
+}
+.intro {
+  max-width: 700px;
+}
+#tasks-container {
+  min-width: 800px;
+}
+table {
   width: 100%;
-  border-collapse: collapse;
 }
 table,
 th,
 td {
-  border: 1px solid;
-  height: 2rem;
+  height: 2.5rem;
+  border: 1px solid var(--background-color);
+}
+th {
+  background-color: rgb(159, 227, 229);
+  border-radius: 0;
 }
 tr {
   width: 100%;
 }
-
+tr:nth-child(odd) {
+  background-color: rgb(159, 201, 252);
+}
+td {
+  padding: 1rem;
+}
+td:last-child {
+  text-align: center;
+}
 button {
-  background-color: var(--contrast-color);
+  background-color: var(--light-green);
   border-radius: 5px;
+  padding: 0.5rem 1.5rem;
+  font-size: var(--p-normal-desktop);
+  border: none;
+}
+button:hover {
+  background-color: #62f389;
+}
+#add-task-form {
+  display: flex;
+  justify-content: space-between;
+}
+input,
+select {
+  height: 2rem;
+  font-size: var(--p-normal-desktop);
+}
+.form-element {
+  display: flex;
+  flex-direction: column;
 }
 footer {
   margin-top: 2rem;
+  background-color: var(--light-green);
 }
 footer div {
   display: flex;
