@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,400;0,700;1,400&family=Roboto+Mono&display=swap");
+
+:root {
+  --background-color: #ccd6f6;
+  --dark-color: #0b192f;
+  --medium-color: #8892b0;
+  --contrast-color: #24d152;
+  --contrast-color2: #eb34d5;
+  --font1: "Mulish", sans-serif;
+  --font2: "Roboto Mono", monospace;
+  --p-normal-mobile: 1rem;
+  --p-large-mobile: 1.25rem;
+  --p-normal-desktop: 1.25rem;
+  --p-small-desktop: 1rem;
+  --transition: all 0.25s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background-color);
+  min-width: 320px;
+  margin: 0;
+  line-height: 1.7rem;
+  font-family: var(--font1);
+  font-size: var(--p-normal-desktop);
+  color: var(--dark-color);
+  display: flex;
+  flex-direction: column;
+}
+#nav {
+  max-width: 1500px;
+  display: flex;
+  margin: auto;
+}
+nav ul {
+  display: flex;
+}
+nav ul li {
+  margin-right: 2rem;
+}
+li {
+  list-style: none;
+  color: var(--contrast-color2);
+  font-size: var(--p-normal-desktop);
+}
+a {
+  text-decoration: none;
+  color: var(--contrast-color2);
+}
+.footer-list li:hover,
+.nav-item:hover,
+.link-hover:hover {
+  text-decoration: underline solid 4px;
+}
+
+main {
+  max-width: 1200px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table,
+th,
+td {
+  border: 1px solid;
+  height: 2rem;
+}
+tr {
+  width: 100%;
+}
+
+button {
+  background-color: var(--contrast-color);
+  border-radius: 5px;
+}
+footer {
+  margin-top: 2rem;
+}
+footer div {
+  display: flex;
+  justify-content: space-around;
+  border-top: 2px solid var(--contrast-color);
+  align-items: center;
+}
+.footer-list a li {
+  margin-top: 1rem;
+}
