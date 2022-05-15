@@ -12,11 +12,10 @@
   <body>
     <header>
       <div>
-        <h1>When did i last<span>- a task tracking app</span></h1>
+        <h1>When did i last <span>- a task tracking app</span></h1>
       </div>
       <nav id="nav">
         <ul>
-          <a href="#projects-container" class="nav-item"><li>Projects</li></a>
           <a href="#about" class="nav-item"><li>About</li></a>
           <a href="#contact" class="nav-item"><li>Contact</li></a>
         </ul>
@@ -41,6 +40,7 @@
         </p>
       </section>
       <section id="tasks-container">
+        <h2>When did you last?</h2>
         <table>
           <thead>
             <tr>
@@ -53,13 +53,36 @@
           </thead>
           <tbody id="taskData"></tbody>
         </table>
+        <div id="new-task-container">
+          <form action="" id="add-task-form">
+            <div class="form-element">
+              <label for="taskInput">Add task</label>
+              <input type="text" id="taskInput" placeholder="add task here" />
+            </div>
+            <div class="form-element">
+              <label for="intervalSelect">Set interval</label>
+              <select name="intervalSelect" id="intervalSelect">
+                <option value="none">None</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="biweekly">Every other week</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </div>
+            <div class="form-element">
+              <label for="reminderCheck">Do you want a reminder?</label>
+              <input type="checkbox" id="reminderCheck" />
+            </div>
+            <input type="submit" />
+          </form>
+        </div>
       </section>
     </main>
     <footer>
       <div>
         <ul class="footer-list">
-          <a href="#" class="nav-item"><li>Home</li></a>
-          <a href="#projects-container" class="nav-item"><li>Projects</li></a>
+          <a href="#" class="nav-item"><li>To the top</li></a>
           <a href="#about" class="nav-item"><li>About</li></a>
           <a href="#contact" class="nav-item"><li>Contact</li></a>
         </ul>
