@@ -43,16 +43,22 @@ const tasksSection = document.getElementById("tasks-container");
 function makeTable(tableBody) {
   tableBody = document.querySelector("#taskData");
   let tr, td;
-  for (let i = 0; i < dataBase.length; i++) {
+  const result = dataBase.filter(
+    (thing, index, self) =>
+      index === self.findIndex((t) => t.taskName === thing.taskName)
+  );
+  console.log(result);
+  tableBody.innerHTML = "";
+  for (let i = 0; i < result.length; i++) {
     tr = tableBody.insertRow(tableBody.rows.length);
     td = tr.insertCell(tr.cells.length);
-    td.innerHTML = `${dataBase[i].taskName}`;
+    td.innerHTML = `${result[i].taskName}`;
     td = tr.insertCell(tr.cells.length);
-    td.innerHTML = dataBase[i].lastDate;
+    td.innerHTML = result[i].lastDate;
     td = tr.insertCell(tr.cells.length);
-    td.innerHTML = dataBase[i].interval;
+    td.innerHTML = result[i].interval;
     td = tr.insertCell(tr.cells.length);
-    td.innerHTML = dataBase[i].reminder;
+    td.innerHTML = result[i].reminder;
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = `<button class='didItBtn'>I did it!</button>`;
   }
@@ -82,6 +88,15 @@ function makeTable(tableBody) {
   }
   addTask();
   doneBtnFunc();
+
+  /* dataBase.filter((obj, index) => {
+    let uniqueEntry = dataBase.indexOf(obj) === index;
+    for (let k = 0; k < dataBase.length; k++) {
+      const entry = dataBase[k];
+      if(entry)
+      delete entry;
+    }
+  }); */
 }
 
 makeTable();
