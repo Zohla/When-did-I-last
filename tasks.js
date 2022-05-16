@@ -55,13 +55,28 @@ function makeTable(tableBody) {
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = dataBase[i].reminder;
     td = tr.insertCell(tr.cells.length);
-    td.innerHTML = `<button>I did it!</button>`;
+    td.innerHTML = `<button class='didItBtn'>I did it!</button>`;
   }
   //make inputrow
   const inputRow = tableBody.insertRow();
-  console.log(inputRow);
-  const taskNameInput = (inputRow.insertCell().innerHTML = `YO!`);
-
+  const taskNameInput =
+    (inputRow.insertCell().innerHTML = `<input type="text" id="taskInput" placeholder="add new task here">`);
+  const taskDateDone = (inputRow.insertCell().innerHTML = ``);
+  const taskIntInput =
+    (inputRow.insertCell().innerHTML = `<select name="intervalSelect" id="intervalSelect">
+  <option value="" disabled selected hidden>Choose interval</option>
+  <option value="none">Choose interval</option>
+  <option value="daily">Daily</option>
+  <option value="weekly">Weekly</option>
+  <option value="biweekly">Every other week</option>
+  <option value="monthly">Monthly</option>
+  <option value="yearly">Yearly</option>
+</select>`);
+  const taskRemind =
+    (inputRow.insertCell().innerHTML = `<label for="reminderCheck">Remind you?</label>
+  <input type="checkbox" id="reminderCheck" />`);
+  const taskInputBtn =
+    (inputRow.insertCell().innerHTML = `<button id='addTaskBtn'>Add task</button>`);
   //set id to all rows
   let rows = document.querySelectorAll("tr");
   let counter = 0;
@@ -69,12 +84,13 @@ function makeTable(tableBody) {
     counter++;
     rows[j].setAttribute("id", counter);
   }
+  addTask();
 }
 makeTable(dataBase);
 
 //set new date in "last-done-cell" when clicking done
 const tableBody = document.querySelector("#taskData");
-const buttons = tableBody.querySelectorAll("button");
+const buttons = tableBody.querySelectorAll(".didItBtn");
 for (let i = 0; i < buttons.length; i++) {
   const button = buttons[i];
   button.addEventListener("click", (e) => {
@@ -85,5 +101,53 @@ for (let i = 0; i < buttons.length; i++) {
     dataBase[objNum].lastDate = currentDate;
     console.log(clickedTask);
     clickedTask.childNodes[1].innerHTML = dataBase[objNum].lastDate;
+  });
+}
+//handle add task
+
+function addTask() {
+  const addTaskButton = document.querySelector("#addTaskBtn");
+  addTaskButton.addEventListener("click", (e) => {
+    const target = e.target;
+    const targetRow = target.parentElement.parentElement;
+    /*     console.log(targetRow.childNodes);
+     */ for (let i = 0; i < targetRow.childNodes.length; i++) {
+      const cell = targetRow.childNodes[i];
+      /*       console.log(cell);
+      console.log(cell.childNodes);
+      
+ */ const newTaskObj = {};
+      for (let j = 0; j < cell.childNodes.length; j++) {
+        const cellInner = cell.childNodes[j];
+        console.log(cellInner.id);
+        switch (cellInner.id) {
+          case "taskInput":
+            let newValue = cellInner.value;
+            console.log(cellInner.value);
+            newTaskObj.taskName = newValue;
+            console.log(newTaskObj);
+            break;
+          case "intervalSelect":
+            console.log("this is interval");
+            console.log(cellInner.value);
+            break;
+          case "reminderCheck":
+            console.log("this is reminder");
+            console.log(cellInner.value);
+            break;
+          case "addTaskBtn":
+            console.log("this is the button");
+            console.log(cellInner.value);
+            break;
+
+          default:
+            console.log("i have noe value");
+            break;
+        }
+        /* if (cell.firstChild == "taskInput") {
+            console.log("Task");
+          } */
+      }
+    }
   });
 }
