@@ -47,14 +47,13 @@ function makeTable(tableBody) {
     (thing, index, self) =>
       index === self.findIndex((t) => t.taskName === thing.taskName)
   );
-  console.log(result);
   tableBody.innerHTML = "";
   for (let i = 0; i < result.length; i++) {
     tr = tableBody.insertRow(tableBody.rows.length);
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = `${result[i].taskName}`;
     td = tr.insertCell(tr.cells.length);
-    td.innerHTML = result[i].lastDate;
+    td.innerHTML = `<p class='last-date'>${result[i].lastDate}</p>`;
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = result[i].interval;
     td = tr.insertCell(tr.cells.length);
@@ -151,8 +150,6 @@ function addTask() {
             break;
         }
       }
-      console.log(newTaskObj);
-      console.log(dataBase);
     }
     const root = document.querySelector(":root");
     if (newTaskObj.taskName.length > 0) {
@@ -163,7 +160,6 @@ function addTask() {
       const taskInput = document.querySelector("#taskInput");
       taskInput.setAttribute("placeholder", "Please add a task name");
       root.style.setProperty("--placeholder-color", "red");
-      console.log(taskInput.getAttribute("placeholder"));
     }
   });
 }
