@@ -64,18 +64,18 @@ function makeTable(tableBody) {
   }
   //make inputrow
   const inputRow = tableBody.insertRow();
-  inputRow.insertCell().innerHTML = `<input type="text" id="taskInput" placeholder="add new task here">`;
+  inputRow.insertCell().innerHTML = `<input type="text" id="taskInput" placeholder="add new task here" >`;
   inputRow.insertCell().innerHTML = ``;
   inputRow.insertCell().innerHTML = `<select name="intervalSelect" id="intervalSelect">
       <option value="" disabled selected hidden>Choose interval</option>
-      <option value="none">Choose interval</option>
+      <option value="none" disabled class="disabled-select">Choose interval</option>
       <option value="daily">Daily</option>
       <option value="weekly">Weekly</option>
       <option value="biweekly">Every other week</option>
       <option value="monthly">Monthly</option>
       <option value="yearly">Yearly</option>
     </select>`;
-  inputRow.insertCell().innerHTML = `<label for="reminderCheck">Remind you?</label>
+  inputRow.insertCell().innerHTML = `<label for="reminderCheck" hidden>Remind you?</label>
       <input type="checkbox" id="reminderCheck" />`;
   inputRow.insertCell().innerHTML = `<button id='addTaskBtn'>Add task</button>`;
 
@@ -88,19 +88,11 @@ function makeTable(tableBody) {
   }
   addTask();
   doneBtnFunc();
-
-  /* dataBase.filter((obj, index) => {
-    let uniqueEntry = dataBase.indexOf(obj) === index;
-    for (let k = 0; k < dataBase.length; k++) {
-      const entry = dataBase[k];
-      if(entry)
-      delete entry;
-    }
-  }); */
 }
 
 makeTable();
 
+const currentDate = new Date().toLocaleDateString("en-GB");
 //set new date in "last-done-cell" when clicking "I did it!"
 function doneBtnFunc() {
   const tableBody = document.querySelector("#taskData");
@@ -111,7 +103,6 @@ function doneBtnFunc() {
       const clickedTask = e.target.parentElement.parentElement;
       const clickedTaskID = clickedTask.id;
       const objNum = parseInt(clickedTaskID - 2);
-      const currentDate = new Date().toLocaleDateString("en-GB");
       dataBase[objNum].lastDate = currentDate;
       clickedTask.childNodes[1].innerHTML = dataBase[objNum].lastDate;
     });
@@ -126,6 +117,8 @@ function addTask() {
   addTaskButton.addEventListener("click", (e) => {
     const target = e.target;
     const targetRow = target.parentElement.parentElement;
+    if (targetRow.taskName == "") {
+    }
     for (let i = 0; i < targetRow.childNodes.length; i++) {
       const cell = targetRow.childNodes[i];
       for (let j = 0; j < cell.childNodes.length; j++) {
@@ -135,16 +128,18 @@ function addTask() {
             let newValue = cellInner.value;
             newTaskObj.taskName = newValue;
             break;
+
           case "intervalSelect":
             const selectedOption =
               cellInner.options[cellInner.selectedIndex].value;
             newTaskObj.interval = selectedOption;
             break;
+
           case "reminderCheck":
             newTaskObj.reminder = cellInner.value;
             break;
+
           case "addTaskBtn":
-            console.log(cellInner.value);
             break;
 
           default:
@@ -155,8 +150,55 @@ function addTask() {
       console.log(newTaskObj);
       console.log(dataBase);
     }
-    dataBase.push(newTaskObj);
-
-    makeTable();
+    const root = document.querySelector(":root");
+    if (newTaskObj.taskName.length > 0) {
+      dataBase.push(newTaskObj);
+      root.style.setProperty("--placeholder-color", "grey");
+      makeTable();
+    } else {
+      const taskInput = document.querySelector("#taskInput");
+      taskInput.setAttribute("placeholder", "Please add a task name");
+      root.style.setProperty("--placeholder-color", "red");
+      console.log(taskInput.getAttribute("placeholder"));
+    }
   });
 }
+
+//visually display overdue tasks
+
+function overdueTask() {
+  for (let i = 0; i < dataBase.length; i++) {
+    const task = dataBase[i];
+
+    const taskLastDone = task.lastDate;
+    const daily = 1;
+    const biweekly = 14;
+    const monthly = 30;
+    const yearly = 365;
+    const today = currentDate;
+    const todayDay = today.substr(0, 2);
+    const todayMonth = today.substr(3, 2);
+    const todayYear = today.substr(8, 2);
+    const lastDoneDay = taskLastDone.substr(0, 2);
+    const lastDoneMonth = taskLastDone.substr(3, 2);
+    const lastDoneYear = taskLastDone.substr(8, 2);
+    /* function checkOverdue(x) {
+      const dueDate = parseInt(todayDay) + x;
+      console.log(dueDate); */
+    let yearsSince = 0;
+    let monthsSince = 0;
+    let daysSince = 0;
+    yearsSince = (parseInt(todayYear) - parseInt(lastDoneYear)) * yearly;
+    monthsSince = (parseInt(todayMonth) - parseInt(lastDoneMonth)) * monthly;
+    daysSince = parseInt(todayDay) - parseInt(lastDoneDay);
+
+    /*     console.log(yearsSince);
+    console.log(monthsSince);
+    console.log(daysSince);
+ */ console.log(yearsSince + monthsSince + daysSince);
+    const timePassed = yearsSince + monthsSince + daysSince;
+  }
+  /* checkOverdue(monthly); */
+}
+/* } */
+overdueTask();
