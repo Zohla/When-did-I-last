@@ -136,7 +136,11 @@ function addTask() {
             break;
 
           case "reminderCheck":
-            newTaskObj.reminder = cellInner.value;
+            if (cellInner.checked) {
+              newTaskObj.reminder = "On";
+            } else {
+              newTaskObj.reminder = "Off";
+            }
             break;
 
           case "addTaskBtn":
