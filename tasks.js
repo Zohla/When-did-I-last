@@ -167,11 +167,19 @@ function addTask() {
 //visually display overdue tasks
 
 function overdueTask() {
-  for (let i = 0; i < dataBase.length; i++) {
-    const task = dataBase[i];
+  const taskList = document.querySelector("#taskData");
+  const rows = taskList.querySelectorAll("tr");
 
-    const taskLastDone = task.lastDate;
+  //loops through all rows displayed minus input row
+  for (let i = 0; i < rows.length - 1; i++) {
+    const row = rows[i];
+    const intervalCell = row.cells[2].innerText;
+    const taskLastDone = row.cells[1].innerText;
+    console.log(intervalCell);
+    console.log(taskLastDone);
+
     const daily = 1;
+    const weekly = 7;
     const biweekly = 14;
     const monthly = 30;
     const yearly = 365;
@@ -182,23 +190,40 @@ function overdueTask() {
     const lastDoneDay = taskLastDone.substr(0, 2);
     const lastDoneMonth = taskLastDone.substr(3, 2);
     const lastDoneYear = taskLastDone.substr(8, 2);
-    /* function checkOverdue(x) {
-      const dueDate = parseInt(todayDay) + x;
-      console.log(dueDate); */
+
     let yearsSince = 0;
     let monthsSince = 0;
     let daysSince = 0;
-    yearsSince = (parseInt(todayYear) - parseInt(lastDoneYear)) * yearly;
-    monthsSince = (parseInt(todayMonth) - parseInt(lastDoneMonth)) * monthly;
+    yearsSince = (parseInt(todayYear) - parseInt(lastDoneYear)) * 365;
+    monthsSince = (parseInt(todayMonth) - parseInt(lastDoneMonth)) * 30;
     daysSince = parseInt(todayDay) - parseInt(lastDoneDay);
 
-    /*     console.log(yearsSince);
-    console.log(monthsSince);
-    console.log(daysSince);
- */ console.log(yearsSince + monthsSince + daysSince);
     const timePassed = yearsSince + monthsSince + daysSince;
+    let daysSinceDueDate = 0;
+    switch (intervalCell) {
+      case "daily":
+        daysSinceDueDate = timePassed - daily;
+        break;
+      case "weekly":
+        daysSinceDueDate = timePassed - weekly;
+        break;
+      case "biweekly":
+        daysSinceDueDate = timePassed - biweekly;
+        break;
+      case "monthly":
+        daysSinceDueDate = timePassed - monthly;
+        break;
+      case "yearly":
+        daysSinceDueDate = timePassed - yearly;
+        break;
+
+      default:
+        break;
+    }
+    console.log(daysSinceDueDate);
+    if (daysSinceDueDate > 0) {
+      row.cells[1].style.backgroundColor = "pink";
+    }
   }
-  /* checkOverdue(monthly); */
 }
-/* } */
 overdueTask();
