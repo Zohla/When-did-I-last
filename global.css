@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,400;0,700;1,400&family=Roboto+Mono&display=swap");
 
 :root {
-  --background-color: #ccd6f6;
+  --background-color: #fff;
   --dark-color: #0b192f;
   --medium-color: #8892b0;
   --light-green: rgb(159, 227, 229);
@@ -77,6 +77,12 @@ h1 > span {
 }
 .intro {
   max-width: 700px;
+}
+.italics {
+  font-style: italic;
+}
+.bold {
+  font-weight: 700;
 }
 #tasks-container {
   min-width: 800px;
