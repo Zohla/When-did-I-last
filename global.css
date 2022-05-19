@@ -93,7 +93,7 @@ table {
 table,
 th,
 td {
-  height: 2.5rem;
+  height: 2rem;
   border: 1px solid var(--background-color);
 }
 th {
@@ -107,7 +107,7 @@ tr:nth-child(odd) {
   background-color: rgb(159, 201, 252);
 }
 td {
-  padding: 1rem;
+  padding: 0.5rem;
 }
 td:last-child {
   text-align: center;
