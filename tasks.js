@@ -53,7 +53,7 @@ function makeTable(tableBody) {
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = `${result[i].taskName}`;
     td = tr.insertCell(tr.cells.length);
-    td.innerHTML = `<p class='last-date'>${result[i].lastDate}</p>`;
+    td.innerHTML = `${result[i].lastDate}`;
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = result[i].interval;
     td = tr.insertCell(tr.cells.length);
@@ -104,6 +104,7 @@ function doneBtnFunc() {
       const objNum = parseInt(clickedTaskID - 2);
       dataBase[objNum].lastDate = currentDate;
       clickedTask.childNodes[1].innerHTML = dataBase[objNum].lastDate;
+      clickedTask.childNodes[1].style.backgroundColor = "var(--light-green)";
     });
   }
 }
