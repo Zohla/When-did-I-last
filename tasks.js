@@ -224,6 +224,8 @@ function overdueTask() {
     console.log(daysSinceDueDate);
     if (daysSinceDueDate > 0) {
       row.cells[1].style.backgroundColor = "pink";
+    } else {
+      row.cells[1].style.backgroundColor = "var(--light-green)";
     }
   }
 }
