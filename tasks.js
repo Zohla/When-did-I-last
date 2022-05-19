@@ -35,7 +35,8 @@ const dataBase = [
     category: "Garden",
   },
 ];
-
+//
+localStorage.setItem = dataBase;
 /* Make example table from array data*/
 
 const tasksSection = document.getElementById("tasks-container");
@@ -43,7 +44,7 @@ const tasksSection = document.getElementById("tasks-container");
 function makeTable(tableBody) {
   tableBody = document.querySelector("#taskData");
   let tr, td;
-  const result = dataBase.filter(
+  const result = localStorage.setItem.filter(
     (thing, index, self) =>
       index === self.findIndex((t) => t.taskName === thing.taskName)
   );
@@ -62,29 +63,9 @@ function makeTable(tableBody) {
     td.innerHTML = `<button class='didItBtn'>I did it!</button>`;
   }
   //make inputrow
-  const inputRow = tableBody.insertRow();
-  inputRow.insertCell().innerHTML = `<input type="text" id="taskInput" placeholder="add new task here" >`;
-  inputRow.insertCell().innerHTML = ``;
-  inputRow.insertCell().innerHTML = `<select name="intervalSelect" id="intervalSelect">
-      <option value="" disabled selected hidden>Choose interval</option>
-      <option value="none" disabled class="disabled-select">Choose interval</option>
-      <option value="daily">Daily</option>
-      <option value="weekly">Weekly</option>
-      <option value="biweekly">Every other week</option>
-      <option value="monthly">Monthly</option>
-      <option value="yearly">Yearly</option>
-    </select>`;
-  inputRow.insertCell().innerHTML = `<label for="reminderCheck" hidden>Remind you?</label>
-      <input type="checkbox" id="reminderCheck" />`;
-  inputRow.insertCell().innerHTML = `<button id='addTaskBtn'>Add task</button>`;
-
+  makeInputRow();
   //set id to all rows
-  let rows = document.querySelectorAll("tr");
-  let counter = 0;
-  for (let j = 0; j < rows.length; j++) {
-    counter++;
-    rows[j].setAttribute("id", counter);
-  }
+  setIdToRows();
   addTask();
   doneBtnFunc();
 }
@@ -99,10 +80,12 @@ function doneBtnFunc() {
   for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];
     button.addEventListener("click", (e) => {
+      setIdToRows();
       const clickedTask = e.target.parentElement.parentElement;
       const clickedTaskID = clickedTask.id;
       const objNum = parseInt(clickedTaskID - 2);
-      dataBase[objNum].lastDate = currentDate;
+      console.log(localStorage.setItem[objNum]);
+      localStorage.setItem[objNum].lastDate = currentDate;
       clickedTask.childNodes[1].innerHTML = dataBase[objNum].lastDate;
       clickedTask.childNodes[1].style.backgroundColor = "var(--light-green)";
     });
@@ -117,8 +100,6 @@ function addTask() {
   addTaskButton.addEventListener("click", (e) => {
     const target = e.target;
     const targetRow = target.parentElement.parentElement;
-    if (targetRow.taskName == "") {
-    }
     for (let i = 0; i < targetRow.childNodes.length; i++) {
       const cell = targetRow.childNodes[i];
       for (let j = 0; j < cell.childNodes.length; j++) {
@@ -128,7 +109,6 @@ function addTask() {
             let newValue = cellInner.value;
             newTaskObj.taskName = newValue;
             break;
-
           case "intervalSelect":
             const selectedOption =
               cellInner.options[cellInner.selectedIndex].value;
@@ -155,14 +135,31 @@ function addTask() {
     const root = document.querySelector(":root");
     if (newTaskObj.taskName.length > 0) {
       dataBase.push(newTaskObj);
+      localStorage.setItem.push(newTaskObj);
       root.style.setProperty("--placeholder-color", "grey");
-      makeTable();
+      const tableBody = document.querySelector("#taskData");
+      tr = tableBody.insertRow();
+      td = tr.insertCell();
+      td.innerHTML = `${newTaskObj.taskName}`;
+      td = tr.insertCell();
+      td.innerHTML = `${newTaskObj.lastDate}`;
+      td = tr.insertCell();
+      td.innerHTML = newTaskObj.interval;
+      td = tr.insertCell();
+      td.innerHTML = newTaskObj.reminder;
+      td = tr.insertCell();
+      td.innerHTML = `<button class='didItBtn'>I did it!</button>`;
+      removeOldInput();
+      makeInputRow();
+      addTask();
+      doneBtnFunc();
     } else {
       const taskInput = document.querySelector("#taskInput");
       taskInput.setAttribute("placeholder", "Please add a task name");
       root.style.setProperty("--placeholder-color", "red");
     }
   });
+  console.log(localStorage.setItem.length);
 }
 
 //visually display overdue tasks
@@ -230,3 +227,37 @@ function overdueTask() {
   }
 }
 overdueTask();
+
+function setIdToRows() {
+  let rows = document.querySelectorAll("tr");
+  let counter = 0;
+  for (let j = 0; j < rows.length; j++) {
+    counter++;
+    rows[j].setAttribute("id", counter);
+  }
+}
+function makeInputRow() {
+  const tableBody = document.querySelector("#taskData");
+
+  const inputRow = tableBody.insertRow();
+  inputRow.setAttribute("class", "inputrow");
+  inputRow.insertCell().innerHTML = `<input type="text" id="taskInput" placeholder="add new task here" >`;
+  inputRow.insertCell().innerHTML = ``;
+  inputRow.insertCell().innerHTML = `<select name="intervalSelect" id="intervalSelect">
+      <option value="" disabled selected hidden>Choose interval</option>
+      <option value="none" disabled class="disabled-select">Choose interval</option>
+      <option value="daily">Daily</option>
+      <option value="weekly">Weekly</option>
+      <option value="biweekly">Every other week</option>
+      <option value="monthly">Monthly</option>
+      <option value="yearly">Yearly</option>
+    </select>`;
+  inputRow.insertCell().innerHTML = `<label for="reminderCheck" hidden>Remind you?</label>
+      <input type="checkbox" id="reminderCheck" />`;
+  inputRow.insertCell().innerHTML = `<button id='addTaskBtn'>Add task</button>`;
+}
+function removeOldInput() {
+  const oldInputRow = document.querySelector(".inputrow");
+  console.log(oldInputRow);
+  oldInputRow.remove();
+}
