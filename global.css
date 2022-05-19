@@ -21,7 +21,10 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
+html,
+body {
+  height: 100%;
+}
 body {
   background: var(--background-color);
   min-width: 320px;
@@ -32,6 +35,11 @@ body {
   color: var(--dark-color);
   display: flex;
   flex-direction: column;
+}
+body,
+footer {
+  position: sticky;
+  top: 100vh;
 }
 #nav {
   max-width: 1500px;
@@ -70,7 +78,7 @@ header,
 main {
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: 0 auto;
 }
 h1 > span {
   font-size: 1.5rem;
@@ -83,6 +91,9 @@ h1 > span {
 }
 .bold {
   font-weight: 700;
+}
+.contrast {
+  color: var(--contrast-color2);
 }
 #tasks-container {
   min-width: 800px;
