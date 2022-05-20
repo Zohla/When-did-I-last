@@ -118,6 +118,9 @@ td {
   /*   border: 1px solid var(--background-color);
  */
 }
+td:nth-child(2) {
+  min-width: 135px;
+}
 th {
   background-color: rgb(159, 227, 229);
   border-radius: 0;
