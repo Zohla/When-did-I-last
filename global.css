@@ -92,6 +92,9 @@ h2 {
 }
 .intro {
   max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 .italics {
   font-style: italic;
