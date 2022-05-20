@@ -15,8 +15,7 @@ The core of the app is just that, but you can also:
 
 ## Built With
 
-- [React.js](https://reactjs.org/)
-- [Bootstrap](https://getbootstrap.com)
+The app is built with just HTML/CSS and JS and needs a backend to function as something other than a demo. 
 
 ## Upcomming features
 
