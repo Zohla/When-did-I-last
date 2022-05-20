@@ -35,21 +35,21 @@ const dataBase = [
     category: "Garden",
   },
 ];
-//
+//store the dataBase array in localStorage
 localStorage.setItem = dataBase;
-/* Make example table from array data*/
 
-const tasksSection = document.getElementById("tasks-container");
+/* Make example table from array data*/
 
 function makeTable(tableBody) {
   tableBody = document.querySelector("#taskData");
   let tr, td;
+  //filter out duplicate tasks //!Remove or move? No need after new task is own function
   const result = localStorage.setItem.filter(
     (thing, index, self) =>
       index === self.findIndex((t) => t.taskName === thing.taskName)
   );
-  tableBody.innerHTML = "";
-  for (let i = 0; i < result.length; i++) {
+  /*   tableBody.innerHTML = "";
+   */ for (let i = 0; i < result.length; i++) {
     tr = tableBody.insertRow(tableBody.rows.length);
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = `${result[i].taskName}`;
@@ -64,9 +64,7 @@ function makeTable(tableBody) {
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = `<button class='delBtn'></button>`;
   }
-  //make inputrow
   makeInputRow();
-  //set id to all rows
   setIdToRows();
   addTask();
   doneBtnFunc();
@@ -117,7 +115,6 @@ function addTask() {
               cellInner.options[cellInner.selectedIndex].value;
             newTaskObj.interval = selectedOption;
             break;
-
           case "reminderCheck":
             if (cellInner.checked) {
               newTaskObj.reminder = "On";
@@ -125,10 +122,8 @@ function addTask() {
               newTaskObj.reminder = "Off";
             }
             break;
-
           case "addTaskBtn":
             break;
-
           default:
             newTaskObj.lastDate = "Not done yet";
             break;
@@ -170,7 +165,6 @@ function addTask() {
 }
 
 //visually display overdue tasks
-
 function overdueTask() {
   const taskList = document.querySelector("#taskData");
   const rows = taskList.querySelectorAll("tr");
@@ -263,11 +257,13 @@ function makeInputRow() {
       <input type="checkbox" id="reminderCheck" />`;
   inputRow.insertCell().innerHTML = `<button id='addTaskBtn'>Add task</button>`;
 }
+//*should solve this without removing and adding new row
 function removeOldInput() {
   const oldInputRow = document.querySelector(".inputrow");
   console.log(oldInputRow);
   oldInputRow.remove();
 }
+//adds listeners and function to delete-task buttons
 function delBtn() {
   const delBtns = document.querySelectorAll(".delBtn");
   for (let i = 0; i < delBtns.length; i++) {
