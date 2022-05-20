@@ -61,6 +61,8 @@ function makeTable(tableBody) {
     td.innerHTML = result[i].reminder;
     td = tr.insertCell(tr.cells.length);
     td.innerHTML = `<button class='didItBtn'>I did it!</button>`;
+    td = tr.insertCell(tr.cells.length);
+    td.innerHTML = `<button class='delBtn'></button>`;
   }
   //make inputrow
   makeInputRow();
@@ -68,6 +70,7 @@ function makeTable(tableBody) {
   setIdToRows();
   addTask();
   doneBtnFunc();
+  delBtn();
 }
 
 makeTable();
@@ -149,10 +152,14 @@ function addTask() {
       td.innerHTML = newTaskObj.reminder;
       td = tr.insertCell();
       td.innerHTML = `<button class='didItBtn'>I did it!</button>`;
+      td = tr.insertCell(tr.cells.length);
+      td.innerHTML = `<button class='delBtn'></button>`;
+
       removeOldInput();
       makeInputRow();
       addTask();
       doneBtnFunc();
+      delBtn();
     } else {
       const taskInput = document.querySelector("#taskInput");
       taskInput.setAttribute("placeholder", "Please add a task name");
@@ -260,4 +267,14 @@ function removeOldInput() {
   const oldInputRow = document.querySelector(".inputrow");
   console.log(oldInputRow);
   oldInputRow.remove();
+}
+function delBtn() {
+  const delBtns = document.querySelectorAll(".delBtn");
+  for (let i = 0; i < delBtns.length; i++) {
+    const btn = delBtns[i];
+    btn.addEventListener("click", (e) => {
+      const clickedTask = e.target.parentElement.parentElement;
+      clickedTask.remove();
+    });
+  }
 }
