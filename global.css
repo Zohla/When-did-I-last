@@ -52,6 +52,9 @@ nav ul {
 nav ul li {
   margin-right: 2rem;
 }
+.you-are-here {
+  text-decoration: underline solid 2px var(--contrast-color2);
+}
 li {
   list-style: none;
   color: var(--dark-color);
@@ -80,8 +83,12 @@ main {
   flex-direction: column;
   margin: 0 auto;
 }
+
 h1 > span {
   font-size: 1.5rem;
+}
+h2 {
+  text-align: center;
 }
 .intro {
   max-width: 700px;
@@ -91,6 +98,9 @@ h1 > span {
 }
 .bold {
   font-weight: 700;
+}
+.quote {
+  font-size: 1.25em;
 }
 .contrast {
   color: var(--contrast-color2);
@@ -105,7 +115,8 @@ table,
 th,
 td {
   height: 2rem;
-  border: 1px solid var(--background-color);
+  /*   border: 1px solid var(--background-color);
+ */
 }
 th {
   background-color: rgb(159, 227, 229);
@@ -113,9 +124,11 @@ th {
 }
 tr {
   width: 100%;
+  background-color: rgb(159, 201, 252);
 }
 tr:nth-child(odd) {
-  background-color: rgb(159, 201, 252);
+  /*   background-color: rgb(132, 168, 212);
+ */
 }
 td {
   padding: 0.5rem;
@@ -132,6 +145,13 @@ button {
 }
 button:hover {
   background-color: #62f389;
+}
+.delBtn {
+  background: pink url("delete.png") 10px no-repeat;
+  height: 2.5rem;
+}
+.delBtn:hover {
+  background-color: red;
 }
 #add-task-form {
   display: flex;
