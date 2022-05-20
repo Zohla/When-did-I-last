@@ -1,6 +1,6 @@
 # When did I last? -a task tracking app
 
-![image](https://user-images.githubusercontent.com/52622303/164316813-4b12d99f-aeb7-4069-85cf-e72b3a50ac99.png)
+![image](whenDidILastScreenshot.png)
 
 A low-pressure, low-maintenance task tracking app.
 
@@ -11,7 +11,7 @@ An app that keeps track on when you last did a spesific task.
 The core of the app is just that, but you can also:
 
 - Set an interval you want to keep for each task, or not.
-- Add a category to the task
+
 
 ## Built With
 
@@ -27,6 +27,7 @@ The core of the app is just that, but you can also:
     - Filtering on due date
     - Delete task
     - Edit task
+    
 
 ## Contributing
 
@@ -38,4 +39,4 @@ If you have anything you'd like to add to this project, make sure to open a pull
 
 [My LinkedIn page](https://www.linkedin.com/in/maren-lilleberre-117406188)
 
-## Acknowledgments
+
