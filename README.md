@@ -20,7 +20,7 @@ The app is built with just HTML/CSS and JS and needs a backend to function as so
 ## Upcomming features
 
     - A backend to log in and store tasks and users.
-    - Better styling and layout
+    - Responsive to fit smaller screens
     - Add categories
     - Filtering on categories
     - Filtering on due date
