@@ -36,15 +36,18 @@ const dataBase = [
   },
 ];
 //store the dataBase array in localStorage
-localStorage.setItem = dataBase;
-
+/* localStorage.setItem = dataBase; */
+localStorage.setItem("dataBase", JSON.stringify(dataBase));
 /* Make example table from array data*/
-
+let array = localStorage.getItem("dataBase");
+array = JSON.parse(array);
+console.log(array);
+console.log(localStorage);
 function makeTable(tableBody) {
   tableBody = document.querySelector("#taskData");
   let tr, td;
   //filter out duplicate tasks //!Remove or move? No need after new task is own function
-  const result = localStorage.setItem.filter(
+  const result = array.filter(
     (thing, index, self) =>
       index === self.findIndex((t) => t.taskName === thing.taskName)
   );
@@ -85,8 +88,8 @@ function doneBtnFunc() {
       const clickedTask = e.target.parentElement.parentElement;
       const clickedTaskID = clickedTask.id;
       const objNum = parseInt(clickedTaskID - 2);
-      console.log(localStorage.setItem[objNum]);
-      localStorage.setItem[objNum].lastDate = currentDate;
+      /*       console.log(localStorage.setItem[objNum]);
+       */ array[objNum].lastDate = currentDate;
       clickedTask.childNodes[1].innerHTML = dataBase[objNum].lastDate;
       clickedTask.childNodes[1].style.backgroundColor = "var(--light-green)";
     });
@@ -133,7 +136,7 @@ function addTask() {
     const root = document.querySelector(":root");
     if (newTaskObj.taskName.length > 0) {
       dataBase.push(newTaskObj);
-      localStorage.setItem.push(newTaskObj);
+      array.push(newTaskObj);
       root.style.setProperty("--placeholder-color", "grey");
       const tableBody = document.querySelector("#taskData");
       tr = tableBody.insertRow();
