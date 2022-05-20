@@ -17,7 +17,6 @@
       <nav id="nav">
         <ul>
           <a href="about.html" class="nav-item"><li>About</li></a>
-          <a href="contact.html" class="nav-item"><li>Contact</li></a>
         </ul>
       </nav>
     </header>
@@ -33,10 +32,7 @@
           you do something, when you did it last time, and optionally set
           intervals and reminders for your tasks.
         </p>
-        <p class="bold">
-          This is just a demo, and your data will only be stored in your local
-          storage!
-        </p>
+        <p class="bold">This is just a demo, and your data is not saved!</p>
       </section>
       <section id="tasks-container">
         <h2>When did you last?</h2>
@@ -59,7 +55,6 @@
         <ul class="footer-list">
           <a href="#" class="nav-item"><li>To the top</li></a>
           <a href="about.html" class="nav-item"><li>About</li></a>
-          <a href="#contact" class="nav-item"><li>Contact</li></a>
         </ul>
         <p class="copyright">&copy; Maren Lilleberre 2022</p>
         <ul class="footer-list" id="socials">
@@ -76,5 +71,24 @@
       </div>
     </footer>
     <script src="tasks.js"></script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCHRAHNxiDBzVo8mcMtQJaeZqqdV3aP5yo",
+        authDomain: "whendidilast-3058b.firebaseapp.com",
+        projectId: "whendidilast-3058b",
+        storageBucket: "whendidilast-3058b.appspot.com",
+        messagingSenderId: "639899256801",
+        appId: "1:639899256801:web:e80622ff2101e3828534a0",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
   </body>
 </html>
